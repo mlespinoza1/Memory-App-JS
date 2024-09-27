@@ -9,59 +9,6 @@ import TimelineOverlay from './TimelineOverlay';
 import GraphViewOverlay from './GraphViewOverlay';
 import FavoriteContactsOverlay from './FavoriteContactsOverlay';
 
-// Add the Sidebar component here
-const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
-  return (
-    <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
-      {/* Add sidebar content here */}
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Sidebar</h2>
-        {/* Add more sidebar items as needed */}
-      </div>
-    </div>
-  );
-};
-
-// Add JumpBackIn component
-const JumpBackIn: React.FC = () => {
-  return (
-    <div>
-      <h3 className="text-lg font-semibold mb-2">Jump Back In</h3>
-      {/* Add content for JumpBackIn */}
-    </div>
-  );
-};
-
-// Add SuggestedJourneys component
-const SuggestedJourneys: React.FC = () => {
-  return (
-    <div>
-      <h3 className="text-lg font-semibold mb-2">Suggested Journeys</h3>
-      {/* Add content for SuggestedJourneys */}
-    </div>
-  );
-};
-
-// Add SidebarToggle component
-const SidebarToggle: React.FC<{ isOpen: boolean; onToggle: () => void }> = ({ isOpen, onToggle }) => {
-  return (
-    <button onClick={onToggle} className="fixed top-4 left-4 z-30">
-      {isOpen ? <Icons.X size={24} /> : <Icons.Menu size={24} />}
-    </button>
-  );
-};
-
-// Add Navigation component
-const Navigation: React.FC = () => {
-  return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-lg">
-      {/* Add navigation items */}
-    </nav>
-  );
-};
-
-// ... (keep all other component definitions unchanged)
-
 const ActionButtons: React.FC<{ toggleOverlay: (overlayName: string) => void }> = ({ toggleOverlay }) => {
   const buttons = [
     { icon: Icons.Book, label: 'Create New', overlay: 'createNew' },
@@ -94,6 +41,51 @@ const FavoriteContacts: React.FC<{ toggleOverlay: (overlayName: string) => void 
         ))}
       </div>
     </div>
+  );
+};
+
+const JumpBackIn: React.FC = () => {
+  return (
+    <div>
+      <h3 className="text-lg font-semibold mb-2">Jump Back In</h3>
+      {/* Add content for JumpBackIn */}
+    </div>
+  );
+};
+
+const SuggestedJourneys: React.FC = () => {
+  return (
+    <div>
+      <h3 className="text-lg font-semibold mb-2">Suggested Journeys</h3>
+      {/* Add content for SuggestedJourneys */}
+    </div>
+  );
+};
+
+const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
+  return (
+    <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
+      <div className="p-4">
+        <h2 className="text-xl font-bold mb-4">Sidebar</h2>
+        {/* Add sidebar content here */}
+      </div>
+    </div>
+  );
+};
+
+const SidebarToggle: React.FC<{ isOpen: boolean; onToggle: () => void }> = ({ isOpen, onToggle }) => {
+  return (
+    <button onClick={onToggle} className="fixed top-4 left-4 z-30">
+      {isOpen ? <Icons.X size={24} /> : <Icons.Menu size={24} />}
+    </button>
+  );
+};
+
+const Navigation: React.FC = () => {
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-lg">
+      {/* Add navigation items */}
+    </nav>
   );
 };
 
