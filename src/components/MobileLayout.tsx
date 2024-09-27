@@ -22,6 +22,44 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   );
 };
 
+// Add JumpBackIn component
+const JumpBackIn: React.FC = () => {
+  return (
+    <div>
+      <h3 className="text-lg font-semibold mb-2">Jump Back In</h3>
+      {/* Add content for JumpBackIn */}
+    </div>
+  );
+};
+
+// Add SuggestedJourneys component
+const SuggestedJourneys: React.FC = () => {
+  return (
+    <div>
+      <h3 className="text-lg font-semibold mb-2">Suggested Journeys</h3>
+      {/* Add content for SuggestedJourneys */}
+    </div>
+  );
+};
+
+// Add SidebarToggle component
+const SidebarToggle: React.FC<{ isOpen: boolean; onToggle: () => void }> = ({ isOpen, onToggle }) => {
+  return (
+    <button onClick={onToggle} className="fixed top-4 left-4 z-30">
+      {isOpen ? <Icons.X size={24} /> : <Icons.Menu size={24} />}
+    </button>
+  );
+};
+
+// Add Navigation component
+const Navigation: React.FC = () => {
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-lg">
+      {/* Add navigation items */}
+    </nav>
+  );
+};
+
 // ... (keep all other component definitions unchanged)
 
 const ActionButtons: React.FC<{ toggleOverlay: (overlayName: string) => void }> = ({ toggleOverlay }) => {
@@ -58,8 +96,6 @@ const FavoriteContacts: React.FC<{ toggleOverlay: (overlayName: string) => void 
     </div>
   );
 };
-
-// ... (keep all other component definitions unchanged)
 
 const MobileLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
