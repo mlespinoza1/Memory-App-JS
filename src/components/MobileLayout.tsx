@@ -9,6 +9,18 @@ import TimelineOverlay from './TimelineOverlay';
 import GraphViewOverlay from './GraphViewOverlay';
 import FavoriteContactsOverlay from './FavoriteContactsOverlay';
 
+// Move Sidebar component definition here
+const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
+  return (
+    <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
+      <div className="p-4">
+        <h2 className="text-xl font-bold mb-4">Sidebar</h2>
+        {/* Add sidebar content here */}
+      </div>
+    </div>
+  );
+};
+
 const ActionButtons: React.FC<{ toggleOverlay: (overlayName: string) => void }> = ({ toggleOverlay }) => {
   const buttons = [
     { icon: Icons.Book, label: 'Create New', overlay: 'createNew' },
@@ -58,17 +70,6 @@ const SuggestedJourneys: React.FC = () => {
     <div>
       <h3 className="text-lg font-semibold mb-2">Suggested Journeys</h3>
       {/* Add content for SuggestedJourneys */}
-    </div>
-  );
-};
-
-const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
-  return (
-    <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Sidebar</h2>
-        {/* Add sidebar content here */}
-      </div>
     </div>
   );
 };
