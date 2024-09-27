@@ -9,6 +9,19 @@ import TimelineOverlay from './TimelineOverlay';
 import GraphViewOverlay from './GraphViewOverlay';
 import FavoriteContactsOverlay from './FavoriteContactsOverlay';
 
+// Add the Sidebar component here
+const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
+  return (
+    <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
+      {/* Add sidebar content here */}
+      <div className="p-4">
+        <h2 className="text-xl font-bold mb-4">Sidebar</h2>
+        {/* Add more sidebar items as needed */}
+      </div>
+    </div>
+  );
+};
+
 // ... (keep all other component definitions unchanged)
 
 const ActionButtons: React.FC<{ toggleOverlay: (overlayName: string) => void }> = ({ toggleOverlay }) => {
