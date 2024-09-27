@@ -1,0 +1,17 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["shadcn"],
+            "message": "Direct imports from 'shadcn' are not allowed. Use local imports instead."
+          }
+        ]
+      }
+    ],
+    "@next/next/no-img-element": "error"
+  }
+}
