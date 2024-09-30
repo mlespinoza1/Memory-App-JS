@@ -13,13 +13,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     <div 
       className={`
         fixed top-20 left-0
-        h-[calc(100vh-9.7rem)] // Adjusted by a slight increment to match perfectly
+        h-[calc(100vh-9.7rem)]
         bg-white bg-opacity-90 backdrop-blur-md 
         transition-all duration-300 ease-in-out 
         overflow-y-auto shadow-lg
         z-30
         rounded-lg
         ${isOpen ? 'w-64' : 'w-0'}
+        md:w-64 // Ensure sidebar is open on larger screens
       `}
     >
       {/* Plus Sign */}
@@ -30,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       </div>
 
       {/* Folders Section */}
-      <div className={`p-4 mt-16`}> {/* Adjusted the margin-top to mt-12 */}
+      <div className={`p-4 mt-16`}>
         <h2 className="text-lg font-bold mb-4">Folders</h2>
         {['Personal', 'Work', 'Family'].map((folder) => (
           <div key={folder} className="mb-2 p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">{folder}</div>
@@ -43,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 const SidebarToggle: React.FC<{ isOpen: boolean; onToggle: () => void; }> = ({ isOpen, onToggle }) => {
   return (
     <button 
-      className={`absolute top-1/2 transform -translate-y-1/2 ${isOpen ? 'left-60' : 'left-4'} bg-white p-2 rounded-full shadow-md z-40`} 
+      className={`absolute top-1/2 transform -translate-y-1/2 ${isOpen ? 'left-60' : 'left-4'} bg-white p-2 rounded-full shadow-md z-40 md:hidden`} 
       onClick={onToggle}
     >
       {isOpen ? <Icons.ChevronLeft size={24} /> : <Icons.ChevronRight size={24} />}
@@ -56,8 +57,7 @@ const ActionButtons: React.FC = () => {
     { icon: Icons.Book, label: 'Create New' },
     { icon: Icons.Play, label: 'Relive' },
     { icon: Icons.Calendar, label: 'Timeline' },
-    { icon: Icons.BarChart2, label: 'Graph View' }, 
-     // Changed to Create New
+    { icon: Icons.BarChart2, label: 'Graph View' },
   ];
 
   return (
@@ -75,7 +75,7 @@ const ActionButtons: React.FC = () => {
 const FavoriteContacts: React.FC = () => {
   return (
     <div className="mt-6">
-      <h3 className="text-sm font-semibold mb-4 text-center">Favorite Contacts</h3> {/* Centered */}
+      <h3 className="text-sm font-semibold mb-4 text-center">Favorite Contacts</h3>
       <div className="flex justify-between">
         {[1, 2, 3, 4, 5].map((num) => (
           <div key={num} className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-sm">
@@ -89,28 +89,30 @@ const FavoriteContacts: React.FC = () => {
 
 const JumpBackIn: React.FC = () => {
   const memories = [
-    { title: 'Memory 1', description: 'Last edited: 2h ago', image: 'https://via.placeholder.com/320x144' },
-    { title: 'Memory 2', description: 'Last edited: 1d ago', image: 'https://via.placeholder.com/320x144' },
-    { title: 'Memory 3', description: 'Last edited: 3d ago', image: 'https://via.placeholder.com/320x144' },
-    { title: 'Memory 4', description: 'Last edited: 4d ago', image: 'https://via.placeholder.com/320x144' },
+    { title: 'Memory 1', description: 'Last edited: 2h ago', image: 'https://via.placeholder.com/160x90' },
+    { title: 'Memory 2', description: 'Last edited: 1d ago', image: 'https://via.placeholder.com/160x90' },
+    { title: 'Memory 3', description: 'Last edited: 3d ago', image: 'https://via.placeholder.com/160x90' },
+    { title: 'Memory 4', description: 'Last edited: 4d ago', image: 'https://via.placeholder.com/160x90' },
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden mt-6 flex-shrink-0 p-4 space-y-6">
-      <h3 className="text-lg font-semibold mb-4 text-center">Jump Back In</h3> {/* Centered */}
-      <div className="grid grid-cols-2 gap-4">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden mt-6 flex-shrink-0 p-4">
+      <h3 className="text-lg font-semibold mb-4 text-center">Jump Back In</h3>
+      <div className="flex overflow-x-auto pb-2 space-x-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
         {memories.map((memory, index) => (
-          <div key={index} className="relative h-36 bg-gray-200 rounded-lg overflow-hidden">
-            <Image 
-              src={memory.image}
-              alt={memory.title}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-50 text-white p-4 flex flex-col items-center justify-center">
-              <div className="text-lg font-medium">{memory.title}</div>
-              <div className="text-sm mt-2">{memory.description}</div>
+          <div key={index} className="flex-shrink-0 w-40 bg-gray-200 rounded-lg overflow-hidden">
+            <div className="relative h-24">
+              <Image 
+                src={memory.image}
+                alt={memory.title}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-t-lg"
+              />
+            </div>
+            <div className="p-2 text-center">
+              <div className="text-sm font-medium">{memory.title}</div>
+              <div className="text-xs text-gray-600 mt-1">{memory.description}</div>
             </div>
           </div>
         ))}
@@ -126,21 +128,22 @@ const SuggestedJourneys: React.FC = () => {
     { title: 'Journey 3', description: 'Short description' },
     { title: 'Journey 4', description: 'Short description' },
     { title: 'Journey 5', description: 'Short description' },
-    { title: 'Journey 6', description: 'Short description' },
-    { title: 'Journey 7', description: 'Short description' },
-    { title: 'Journey 8', description: 'Short description' },
   ];
 
   return (
-    <div className="mt-8 flex-shrink-0 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 pb-2">
-      <h3 className="text-sm font-semibold mb-4 text-center">Suggested Journeys</h3> {/* Centered */}
-      <div className="flex space-x-4">
-        {journeys.map(({ title, description }) => (
-          <div key={title} className="min-w-[220px] bg-gray-200 p-4 rounded-lg text-center flex flex-col justify-center h-32">
-            <div className="font-medium text-sm">{title}</div>
-            <div className="text-xs text-gray-600 mt-1">{description}</div>
-          </div>
-        ))}
+    <div className="flex-grow flex flex-col mt-6">
+      <h3 className="text-lg font-semibold mb-4 text-center">Suggested Journeys</h3>
+      <div className="flex-grow flex items-center">
+        <div className="flex overflow-x-auto space-x-4 pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+          {journeys.map(({ title, description }, index) => (
+            <div key={index} className="flex-shrink-0 w-48 bg-gray-200 rounded-lg overflow-hidden">
+              <div className="p-4 text-center h-32 flex flex-col justify-center">
+                <div className="font-medium text-sm">{title}</div>
+                <div className="text-xs text-gray-600 mt-2">{description}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -160,7 +163,7 @@ const MobileLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-16 flex flex-col">
+    <div className="min-h-screen bg-gray-100 pb-16 flex flex-col overflow-hidden">
       {/* Top Row */}
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 bg-white shadow-sm z-20">
         <div className="text-lg font-bold">Logo</div>
@@ -173,13 +176,13 @@ const MobileLayout: React.FC = () => {
       <Sidebar isOpen={sidebarOpen} />
 
       {/* Main Content */}
-      <div className={`pt-20 px-4 flex-grow flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : ''}`}>
-        <div className="bg-white rounded-xl p-4 flex flex-col justify-between h-full space-y-8">
-          <div className="space-y-6 flex-shrink-0">
+      <div className={`pt-20 px-4 flex-grow flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-0 md:ml-64'} overflow-hidden`}>
+        <div className="bg-white rounded-xl p-4 flex flex-col h-full">
+          <div className="flex-shrink-0">
             <ActionButtons />
             <FavoriteContacts />
+            <JumpBackIn />
           </div>
-          <JumpBackIn />
           <SuggestedJourneys />
         </div>
       </div>
