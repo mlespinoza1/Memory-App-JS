@@ -83,7 +83,7 @@ const FavoriteContacts: React.FC = () => {
   return (
     <div className="mt-6">
       <h3 className="text-sm font-semibold mb-4 text-center">Favorite Contacts</h3>
-      <div className="flex justify-between">
+      <div className="flex justify-center gap-36">
         {[1, 2, 3, 4, 5].map((num) => (
           <div key={num} className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-sm">
             {num}
@@ -182,7 +182,7 @@ const MobileLayout: React.FC = () => {
       <Sidebar isOpen={sidebarOpen} />
 
       {/* Main Content */}
-      <div className={`pt-20 px-4 flex-grow flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-0 md:ml-64'} overflow-hidden`}>
+      <div className={`pt-20 pl-4 flex-grow flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-0 md:ml-64'} overflow-hidden`}>
         <div className="bg-white rounded-xl p-4 flex flex-col h-full">
           <div className="flex-shrink-0">
             <ActionButtons />
