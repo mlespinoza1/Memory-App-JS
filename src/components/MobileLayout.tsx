@@ -75,7 +75,7 @@ const ActionButtons: React.FC = () => {
 const FavoriteContacts: React.FC = () => {
   return (
     <div className="mt-6">
-      <h3 className="text-sm font-semibold mb-4 text-center">Favorite Contacts</h3>
+      <h3 className="text-lg font-semibold mb-4 text-center">Favorite Contacts</h3>
       <div className="flex justify-between">
         {[1, 2, 3, 4, 5].map((num) => (
           <div key={num} className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-sm">
@@ -89,30 +89,28 @@ const FavoriteContacts: React.FC = () => {
 
 const JumpBackIn: React.FC = () => {
   const memories = [
-    { title: 'Memory 1', description: 'Last edited: 2h ago', image: 'https://via.placeholder.com/160x90' },
-    { title: 'Memory 2', description: 'Last edited: 1d ago', image: 'https://via.placeholder.com/160x90' },
-    { title: 'Memory 3', description: 'Last edited: 3d ago', image: 'https://via.placeholder.com/160x90' },
-    { title: 'Memory 4', description: 'Last edited: 4d ago', image: 'https://via.placeholder.com/160x90' },
+    { title: 'Memory 1', description: 'Last edited: 2h ago', image: 'https://via.placeholder.com/320x144' },
+    { title: 'Memory 2', description: 'Last edited: 1d ago', image: 'https://via.placeholder.com/320x144' },
+    { title: 'Memory 3', description: 'Last edited: 3d ago', image: 'https://via.placeholder.com/320x144' },
+    { title: 'Memory 4', description: 'Last edited: 4d ago', image: 'https://via.placeholder.com/320x144' },
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden mt-6 flex-shrink-0 p-4">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden mt-6 p-4">
       <h3 className="text-lg font-semibold mb-4 text-center">Jump Back In</h3>
-      <div className="flex overflow-x-auto pb-2 space-x-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+      <div className="flex space-x-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
         {memories.map((memory, index) => (
-          <div key={index} className="flex-shrink-0 w-40 bg-gray-200 rounded-lg overflow-hidden">
-            <div className="relative h-24">
-              <Image 
-                src={memory.image}
-                alt={memory.title}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-t-lg"
-              />
-            </div>
-            <div className="p-2 text-center">
-              <div className="text-sm font-medium">{memory.title}</div>
-              <div className="text-xs text-gray-600 mt-1">{memory.description}</div>
+          <div key={index} className="relative w-80 h-36 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+            <Image 
+              src={memory.image}
+              alt={memory.title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50 text-white p-4 flex flex-col items-center justify-center">
+              <div className="text-lg font-medium">{memory.title}</div>
+              <div className="text-sm mt-2">{memory.description}</div>
             </div>
           </div>
         ))}
@@ -128,19 +126,21 @@ const SuggestedJourneys: React.FC = () => {
     { title: 'Journey 3', description: 'Short description' },
     { title: 'Journey 4', description: 'Short description' },
     { title: 'Journey 5', description: 'Short description' },
+    { title: 'Journey 6', description: 'Short description' },
+    { title: 'Journey 7', description: 'Short description' },
+    { title: 'Journey 8', description: 'Short description' },
   ];
 
   return (
-    <div className="flex-grow flex flex-col mt-6">
+    <div className="mt-8">
       <h3 className="text-lg font-semibold mb-4 text-center">Suggested Journeys</h3>
-      <div className="flex-grow flex items-center">
-        <div className="flex overflow-x-auto space-x-4 pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-          {journeys.map(({ title, description }, index) => (
-            <div key={index} className="flex-shrink-0 w-48 bg-gray-200 rounded-lg overflow-hidden">
-              <div className="p-4 text-center h-32 flex flex-col justify-center">
-                <div className="font-medium text-sm">{title}</div>
-                <div className="text-xs text-gray-600 mt-2">{description}</div>
-              </div>
+      <div className="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        <div className="flex space-x-4 w-max">
+          {journeys.map(({ title, description }) => (
+            <div key={title} className="w-64 flex-shrink-0 bg-gray-200 p-4 rounded-lg text-center flex flex-col justify-center h-48
+            ">
+              <div className="font-medium text-sm">{title}</div>
+              <div className="text-xs text-gray-600 mt-1">{description}</div>
             </div>
           ))}
         </div>
