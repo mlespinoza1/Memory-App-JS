@@ -31,11 +31,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       </div>
 
       {/* Folders Section */}
-      <div className={`p-4 mt-16`}>
+      <div className={`p-4 mt-16 flex-grow`}>
         <h2 className="text-lg font-bold mb-4">Folders</h2>
         {['Personal', 'Work', 'Family'].map((folder) => (
           <div key={folder} className="mb-2 p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">{folder}</div>
         ))}
+      </div>
+
+      {/* Bottom Section */}
+      <div className="p-4 mt-auto">
+        <h2 className="text-lg font-bold mb-4">Bottom Section</h2>
+        <div className="mb-2 p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">Item 1</div>
+        <div className="mb-2 p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200">Item 2</div>
       </div>
     </div>
   );
@@ -75,7 +82,7 @@ const ActionButtons: React.FC = () => {
 const FavoriteContacts: React.FC = () => {
   return (
     <div className="mt-6">
-      <h3 className="text-lg font-semibold mb-4 text-center">Favorite Contacts</h3>
+      <h3 className="text-sm font-semibold mb-4 text-center">Favorite Contacts</h3>
       <div className="flex justify-between">
         {[1, 2, 3, 4, 5].map((num) => (
           <div key={num} className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-sm">
@@ -132,13 +139,12 @@ const SuggestedJourneys: React.FC = () => {
   ];
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 flex-grow">
       <h3 className="text-lg font-semibold mb-4 text-center">Suggested Journeys</h3>
       <div className="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
         <div className="flex space-x-4 w-max">
           {journeys.map(({ title, description }) => (
-            <div key={title} className="w-64 flex-shrink-0 bg-gray-200 p-4 rounded-lg text-center flex flex-col justify-center h-48
-            ">
+            <div key={title} className="w-64 flex-shrink-0 bg-gray-200 p-4 rounded-lg text-center flex flex-col justify-center h-48">
               <div className="font-medium text-sm">{title}</div>
               <div className="text-xs text-gray-600 mt-1">{description}</div>
             </div>
@@ -182,8 +188,8 @@ const MobileLayout: React.FC = () => {
             <ActionButtons />
             <FavoriteContacts />
             <JumpBackIn />
+            <SuggestedJourneys />
           </div>
-          <SuggestedJourneys />
         </div>
       </div>
 
