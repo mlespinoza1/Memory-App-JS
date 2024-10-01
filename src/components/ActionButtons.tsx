@@ -1,40 +1,29 @@
-'use client'
-
 import React from 'react';
+import { useOverlay } from '../context/OverlayContext';
 import * as Icons from 'lucide-react';
+import Button from "@/components/ui/Button";
 
-interface ActionButtonsProps {
-  toggleCreateNewOverlay: () => void;
-  toggleReliveOverlay: () => void;
-  toggleTimelineOverlay: () => void;
-  toggleGraphViewOverlay: () => void;
-}
-
-const ActionButtons: React.FC<ActionButtonsProps> = ({
-  toggleCreateNewOverlay,
-  toggleReliveOverlay,
-  toggleTimelineOverlay,
-  toggleGraphViewOverlay
-}) => {
-  const buttons = [
-    { icon: Icons.Book, label: 'Create New', onClick: toggleCreateNewOverlay },
-    { icon: Icons.Play, label: 'Relive', onClick: toggleReliveOverlay },
-    { icon: Icons.Calendar, label: 'Timeline', onClick: toggleTimelineOverlay },
-    { icon: Icons.BarChart2, label: 'Graph View', onClick: toggleGraphViewOverlay },
-  ];
+const ActionButtons: React.FC = () => {
+  const { openOverlay } = useOverlay();
 
   return (
-    <div className="grid grid-cols-4 gap-3">
-      {buttons.map(({ icon: Icon, label, onClick }) => (
-        <button
-          key={label}
-          className="flex flex-col items-center justify-center bg-white p-3 rounded-lg shadow-md"
-          onClick={onClick}
-        >
-          <Icon size={22} className="mb-2" />
-          <span className="text-xs">{label}</span>
-        </button>
-      ))}
+    <div className="grid grid-cols-4 gap-2 mb-3">
+      <Button onClick={() => openOverlay('createNew')} className="flex flex-col items-center justify-center p-2 bg-white rounded-xl shadow">
+        <Icons.PlusSquare size={24} />
+        <span className="text-xs mt-1">Create New</span>
+      </Button>
+      <Button onClick={() => openOverlay('relive')} className="flex flex-col items-center justify-center p-2 bg-white rounded-xl shadow">
+        <Icons.Play size={24} />
+        <span className="text-xs mt-1">Relive</span>
+      </Button>
+      <Button onClick={() => openOverlay('timeline')} className="flex flex-col items-center justify-center p-2 bg-white rounded-xl shadow">
+        <Icons.Calendar size={24} />
+        <span className="text-xs mt-1">Timeline</span>
+      </Button>
+      <Button onClick={() => openOverlay('graphView')} className="flex flex-col items-center justify-center p-2 bg-white rounded-xl shadow">
+        <Icons.BarChart2 size={24} />
+        <span className="text-xs mt-1">Graph View</span>
+      </Button>
     </div>
   );
 };
