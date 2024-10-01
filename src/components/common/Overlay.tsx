@@ -15,7 +15,10 @@ export default function Overlay({ isOpen, onClose, title, children }: OverlayPro
     <Dialog.Root open={isOpen} onOpenChange={onClose}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm" />
-        <Dialog.Content className="fixed z-50 w-full max-w-md p-6 bottom-0 left-1/2 transform -translate-x-1/2 bg-gray-900 rounded-t-xl shadow-xl">
+        <Dialog.Content 
+          className="fixed z-50 w-[90vw] max-w-md p-6 left-1/2 transform -translate-x-1/2 bg-gray-900 rounded-xl shadow-xl overflow-y-auto max-h-[85vh] sm:w-full sm:max-h-[90vh] md:max-h-[80vh]"
+          style={{ top: 'max(2rem, env(safe-area-inset-top))', bottom: 'max(2rem, env(safe-area-inset-bottom))' }}
+        >
           <Dialog.Title className="text-xl font-semibold mb-4 text-white">
             {title}
           </Dialog.Title>
@@ -23,9 +26,7 @@ export default function Overlay({ isOpen, onClose, title, children }: OverlayPro
             <X className="h-4 w-4" />
             <span className="sr-only">Close</span>
           </Button>
-          <div className="max-h-[70vh] overflow-y-auto">
-            {children}
-          </div>
+          {children}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
