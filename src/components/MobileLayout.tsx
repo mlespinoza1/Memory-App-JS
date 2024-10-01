@@ -1,23 +1,20 @@
-'use client';
+'use client'
 
 import React, { useState } from 'react';
 import * as Icons from 'lucide-react';
-import CreateNewOverlay from './CreateNewOverlay';
-import ReliveOverlay from './ReliveOverlay';
-import TimelineOverlay from './TimelineOverlay';
-import GraphViewOverlay from './GraphViewOverlay';
-import FavoriteContactsOverlay from './FavoriteContactsOverlay';
+import Sidebar from './Sidebar';
+import SidebarToggle from './SidebarToggle';
+import Navigation from './Navigation';
+import ActionButtons from './ActionButtons';
+import FavoriteContacts from './FavoriteContacts';
+import JumpBackIn from './JumpBackIn';
+import SuggestedJourneys from './SuggestedJourneys';
 
 const MobileLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeOverlay, setActiveOverlay] = useState<string | null>(null);
-
-  const toggleOverlay = (overlayName: string) => {
-    setActiveOverlay(activeOverlay === overlayName ? null : overlayName);
-  };
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-16 flex flex-col">
+    <div className="min-h-screen bg-gray-100 pb-16 flex flex-col overflow-hidden">
       {/* Top Row */}
       <div className="fixed top-0 left-0 right-0 flex justify-between items-center p-4 bg-white shadow-sm z-20">
         <div className="text-lg font-bold">Logo</div>
@@ -26,55 +23,26 @@ const MobileLayout: React.FC = () => {
         </button>
       </div>
 
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} />
+
       {/* Main Content */}
-      <div className={`pt-20 px-4 flex-grow flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : ''}`}>
-        <div className="bg-white rounded-xl p-4 flex flex-col justify-between h-full space-y-8">
-          <div className="space-y-6 flex-shrink-0">
-            <div className="grid grid-cols-4 gap-3">
-              <button onClick={() => toggleOverlay('createNew')} className="flex flex-col items-center justify-center bg-white p-3 rounded-lg shadow-md">
-                <Icons.Book size={22} className="mb-2" />
-                <span className="text-xs">Create New</span>
-              </button>
-              <button onClick={() => toggleOverlay('relive')} className="flex flex-col items-center justify-center bg-white p-3 rounded-lg shadow-md">
-                <Icons.Play size={22} className="mb-2" />
-                <span className="text-xs">Relive</span>
-              </button>
-              <button onClick={() => toggleOverlay('timeline')} className="flex flex-col items-center justify-center bg-white p-3 rounded-lg shadow-md">
-                <Icons.Calendar size={22} className="mb-2" />
-                <span className="text-xs">Timeline</span>
-              </button>
-              <button onClick={() => toggleOverlay('graphView')} className="flex flex-col items-center justify-center bg-white p-3 rounded-lg shadow-md">
-                <Icons.BarChart2 size={22} className="mb-2" />
-                <span className="text-xs">Graph View</span>
-              </button>
-            </div>
-            <div className="mt-6">
-              <h3 className="text-sm font-semibold mb-4 text-center">Favorite Contacts</h3>
-              <div className="flex justify-center gap-14">
-                {[1, 2, 3, 4, 5].map((num) => (
-                  <button
-                    key={num}
-                    onClick={() => toggleOverlay('favoriteContacts')}
-                    className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-sm"
-                  >
-                    {num}
-                  </button>
-                ))}
-              </div>
-            </div>
+      <div className={`pt-20 pl-4 flex-grow flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-0 md:ml-64'} overflow-hidden`}>
+        <div className="bg-white rounded-xl p-4 flex flex-col h-full">
+          <div className="flex-shrink-0">
+            <ActionButtons />
+            <FavoriteContacts />
+            <JumpBackIn />
+            <SuggestedJourneys />
           </div>
-          {/* Add JumpBackIn and SuggestedJourneys components here */}
         </div>
       </div>
 
-      {/* Overlays */}
-      {activeOverlay === 'createNew' && <CreateNewOverlay onClose={() => setActiveOverlay(null)} />}
-      {activeOverlay === 'relive' && <ReliveOverlay onClose={() => setActiveOverlay(null)} />}
-      {activeOverlay === 'timeline' && <TimelineOverlay onClose={() => setActiveOverlay(null)} />}
-      {activeOverlay === 'graphView' && <GraphViewOverlay onClose={() => setActiveOverlay(null)} />}
-      {activeOverlay === 'favoriteContacts' && <FavoriteContactsOverlay onClose={() => setActiveOverlay(null)} />}
+      {/* Sidebar Toggle Button */}
+      <SidebarToggle isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
 
-      {/* Add SidebarToggle and Navigation components here */}
+      {/* Navigation */}
+      <Navigation />
     </div>
   );
 };
