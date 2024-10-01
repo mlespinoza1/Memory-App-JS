@@ -2,9 +2,13 @@
 
 import React from 'react';
 
-const FavoriteContacts: React.FC = () => {
+interface FavoriteContactsProps {
+  toggleFavoriteContactsOverlay: () => void;
+}
+
+const FavoriteContacts: React.FC<FavoriteContactsProps> = ({ toggleFavoriteContactsOverlay }) => {
   return (
-    <div className="mt-6">
+    <div className="mt-6 cursor-pointer" onClick={toggleFavoriteContactsOverlay}>
       <h3 className="text-sm font-semibold mb-4 text-center">Favorite Contacts</h3>
       <div className="flex justify-center gap-36">
         {[1, 2, 3, 4, 5].map((num) => (
