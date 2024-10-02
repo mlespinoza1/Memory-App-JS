@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { memo } from 'react';
 import { OverlayProvider } from '../context/OverlayContext';
 import { SidebarProvider, useSidebar } from '../contexts/SidebarContext';
 import ErrorBoundary from './common/ErrorBoundary';
@@ -15,11 +15,11 @@ interface LayoutProps {
   className?: string;
 }
 
-const MobileLayoutContent: React.FC<LayoutProps> = ({ className = '' }) => {
+const MobileLayoutContent: React.FC<LayoutProps> = memo(({ className = '' }) => {
   const { isOpen } = useSidebar();
 
   return (
-    <div className={`min-h-screen bg-gray-100 pb-16 flex flex-col overflow-hidden ${className}`}>
+    <div className={`mobile-layout ${className}`}>
       <Header className="w-full" />
       <div className="flex flex-1 relative">
         <Sidebar isOpen={isOpen} className="absolute inset-y-0 left-0 z-20 transition-transform duration-300 ease-in-out transform" />
@@ -30,7 +30,9 @@ const MobileLayoutContent: React.FC<LayoutProps> = ({ className = '' }) => {
       <Overlays />
     </div>
   );
-};
+});
+
+MobileLayoutContent.displayName = 'MobileLayoutContent';
 
 const MobileLayout: React.FC<LayoutProps> = ({ className }) => (
   <ErrorBoundary>

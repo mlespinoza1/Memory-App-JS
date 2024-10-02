@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useSidebar } from '../contexts/SidebarContext';
 import ActionButtons from './ActionButtons';
 import FavoriteContacts from './FavoriteContacts';
@@ -9,18 +9,28 @@ interface MainContentProps {
   className?: string;
 }
 
+const MainContentArea: React.FC = memo(() => (
+  <div className="flex-shrink-0">
+    <ActionButtons />
+    <FavoriteContacts />
+    <JumpBackIn />
+    <SuggestedJourneys />
+  </div>
+));
+
+MainContentArea.displayName = 'MainContentArea';
+
 const MainContent: React.FC<MainContentProps> = ({ className = '' }) => {
   const { isOpen } = useSidebar();
 
   return (
-    <div className={`pt-20 pl-4 flex-grow flex flex-col transition-all duration-300 ${isOpen ? 'ml-64' : 'ml-0 md:ml-64'} overflow-hidden ${className}`}>
-      <div className="bg-white rounded-xl p-4 flex flex-col h-full">
-        <div className="flex-shrink-0">
-          <ActionButtons />
-          <FavoriteContacts />
-          <JumpBackIn />
-          <SuggestedJourneys />
-        </div>
+    <div 
+      className={`main-content ${isOpen ? 'ml-64' : 'ml-0 md:ml-64'} ${className}`}
+      role="main"
+      aria-label="Main content area"
+    >
+      <div className="main-content-area">
+        <MainContentArea />
       </div>
     </div>
   );

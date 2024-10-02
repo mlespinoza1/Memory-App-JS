@@ -48,4 +48,16 @@ body {
   .close-icon {
     @apply h-4 w-4;
   }
+
+  .mobile-layout {
+    @apply min-h-screen bg-gray-100 pb-16 flex flex-col overflow-hidden;
+  }
+
+  .main-content {
+    @apply pt-20 pl-4 flex-grow flex flex-col transition-all duration-300 overflow-hidden;
+  }
+
+  .main-content-area {
+    @apply bg-white rounded-xl p-4 flex flex-col h-full;
+  }
 }
