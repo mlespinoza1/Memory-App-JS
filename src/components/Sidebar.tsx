@@ -5,9 +5,10 @@ import * as Icons from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
+  className?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, className = '' }) => {
   return (
     <div 
       className={`
@@ -20,6 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         rounded-lg
         ${isOpen ? 'w-64' : 'w-0'}
         md:w-64 // Ensure sidebar is open on larger screens
+        ${className}
       `}
     >
       {/* Plus Sign */}
