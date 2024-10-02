@@ -10,22 +10,23 @@ interface OverlayProps {
   children: React.ReactNode
 }
 
+const CloseButton: React.FC<{ onClick: () => void }> = ({ onClick }) => (
+  <Button onClick={onClick} className="close-button">
+    <X className="close-icon" />
+    <span className="sr-only">Close</span>
+  </Button>
+);
+
 export default function Overlay({ isOpen, onClose, title, children }: OverlayProps) {
   return (
     <Dialog.Root open={isOpen} onOpenChange={onClose}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm" />
-        <Dialog.Content 
-          className="fixed z-50 w-[90vw] max-w-md p-6 left-1/2 transform -translate-x-1/2 bg-gray-900 rounded-xl shadow-xl overflow-y-auto max-h-[85vh] sm:w-full sm:max-h-[90vh] md:max-h-[80vh]"
-          style={{ top: 'max(2rem, env(safe-area-inset-top))', bottom: 'max(2rem, env(safe-area-inset-bottom))' }}
-        >
-          <Dialog.Title className="text-xl font-semibold mb-4 text-white">
+        <Dialog.Overlay className="overlay" />
+        <Dialog.Content className="dialog-content">
+          <Dialog.Title className="dialog-title">
             {title}
           </Dialog.Title>
-          <Button onClick={onClose} className="absolute top-4 right-4">
-            <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
-          </Button>
+          <CloseButton onClick={onClose} />
           {children}
         </Dialog.Content>
       </Dialog.Portal>
